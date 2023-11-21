@@ -1,9 +1,24 @@
 <script setup>
 import { ref } from 'vue'
 
-const masaOne = ref()
-const masTwo = ref()
-const anguloOne = ref()
+const masaOne = ref(0.25)
+const masTwo = ref(0.5)
+const anguloOne = ref(50)
+let coefRozamiento = ref('');
+function calcular() {
+  const anguloRadianes = anguloOne.value * (Math.PI / 180)
+  const wDos = masTwo.value * 9.8
+  const wOne = masaOne.value * 9.8
+  console.log('wOne es ' + wOne + 'Wdos es :' + wDos)
+  const tension = wDos * Math.sin(anguloRadianes)
+  console.log('La tension es' + tension)
+  const fuerzaRozamiento = -(wOne * Math.sin(anguloRadianes)) + tension
+
+  const normal = wOne * Math.cos(anguloRadianes)
+  console.log('Normal ' + normal)
+  console.log('Fuerza de rozamiento ' + fuerzaRozamiento)
+  coefRozamiento.value = "El coeficiente de rozamiento es: "+ fuerzaRozamiento / normal
+}
 </script>
 
 <template>
@@ -15,7 +30,7 @@ const anguloOne = ref()
             <li class="text-white inline text-xl mx-auto">
               <img class="w-10 h-9 rounded-[5px]" src="./assets/icon.png" alt="" />
             </li>
-            <li class="inline text-white"><a href="">Caso 1</a></li>
+            <li class="inline text-white"><a href="./components/CaseTwo.vue">Caso 1</a></li>
             <li class="inline text-white"><a href="">Mas informacion</a></li>
             <li class="inline text-white"><a href="">Uso</a></li>
           </ul>
@@ -24,27 +39,26 @@ const anguloOne = ref()
 
       <div class="flex flex-col w-full mx-auto relative">
         <div class="mx-auto">
-          <img class="mx-auto w-[460px]  h-[360px]" src="./assets/enacim.png" alt="" />
+          <img class="mx-auto w-[460px] h-[360px]" src="./assets/enacim.png" alt="" />
         </div>
         <div class="absolute right-[20rem] top-[10rem] flex flex-col">
-          <span class=" text-gray-400 pr-2 text-xs mx-auto">Masa 2 (kg)</span>
+          <span class="text-gray-400 pr-2 text-xs mx-auto">Masa 2 (kg)</span>
           <span
-            class="pr-16 h-8 w-8 border-bg-[#5168FD] outline-none border-2 rounded-[6px] bg-slate-400 text-sm relative overflow-hidden"
+            class="pr-16 h-8 w-8 border-bg-[#5168FD] outline-none border-2 rounded-[6px] bg-slate-400 text-sm relative overflow-hidden text-white"
             >{{ masTwo }}</span
           >
-          
         </div>
-        <div class=" absolute left-[32rem] rotate-[10deg] top-[17.6rem] flex">
-          <span class=" text-slate-300 pr-2 text-sm">θ</span>
+        <div class="absolute left-[32rem] rotate-[10deg] top-[17.6rem] flex">
+          <span class="text-slate-300 pr-2 text-sm">θ</span>
           <span
-            class="pr-16 h-8 w-8 border-bg-[#5168FD] outline-none border-2 rounded-[6px] bg-slate-400 text-sm relative overflow-hidden"
+            class="pr-16 h-8 w-8 border-bg-[#5168FD] outline-none border-2 rounded-[6px] bg-slate-400 text-sm relative overflow-hidden text-white"
             >{{ anguloOne }}</span
           >
         </div>
         <div class="absolute left-[17rem] top-48 flex flex-col">
-          <span class=" text-gray-400 pr-2 text-xs mx-auto">Masa 1 (kg)</span>
-           <span
-            class="pr-16 h-8 w-8 border-bg-[#5168FD] outline-none border-2 rounded-[6px] bg-slate-400 text-sm relative overflow-hidden"
+          <span class="text-gray-400 pr-2 text-xs mx-auto">Masa 1 (kg)</span>
+          <span
+            class="pr-16 h-8 w-8 border-bg-[#5168FD] outline-none border-2 rounded-[6px] bg-slate-400 text-sm relative overflow-hidden text-white"
             >{{ masaOne }}</span
           >
         </div>
@@ -72,15 +86,21 @@ const anguloOne = ref()
               placeholder="Angulo"
             />
           </div>
-          <div class="flex mx-auto mt-10 mb-10">
+          <div class="flex mx-auto mt-10 mb-10 flex-col">
             <button
               class="px-12 py-4 bg-white rounded-[6px] text-slate-400 mx-auto"
               aria-placeholder="Ir"
+              @click="calcular()"
             >
               IR
             </button>
+           
+              <span class=" mt-7 text-white mx-auto">{{ coefRozamiento }}</span>
           </div>
         </div>
+      </div>
+      <div class="">
+       
       </div>
     </div>
   </div>
