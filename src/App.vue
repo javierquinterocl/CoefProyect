@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue'
 
-const masaOne = ref(0.25)
-const masTwo = ref(0.5)
-const anguloOne = ref(50)
-let coefRozamiento = ref('');
+const masaOne = ref()
+const masTwo = ref()
+const anguloOne = ref()
+let coefRozamiento = ref('')
 function calcular() {
   const anguloRadianes = anguloOne.value * (Math.PI / 180)
   const wDos = masTwo.value * 9.8
@@ -17,54 +17,62 @@ function calcular() {
   const normal = wOne * Math.cos(anguloRadianes)
   console.log('Normal ' + normal)
   console.log('Fuerza de rozamiento ' + fuerzaRozamiento)
-  coefRozamiento.value = "El coeficiente de rozamiento es: "+ fuerzaRozamiento / normal
+  coefRozamiento.value = 'El coeficiente de rozamiento es: ' + fuerzaRozamiento / normal
 }
 </script>
 
 <template>
-  <div class="flex max-w-5xl mx-auto bg-[#EFF1FF] font-Haken">
+  <div class="h-[100vh] w-full bg-[#FD5720] absolute z-10 items-center mx-auto flex fade-out ">
+    <img class="w-[20.5rem] rounded-[20px] mx-auto scale-out-center" src="./assets/icon2.png" alt="" />
+  </div>
+  <div class="flex mx-auto bg-[#efefef] font-Haken">
     <div class="mx-auto flex flex-col w-full">
-      <div class="h-16 bg-[#FD5720]">
-        <menu class="flex mt-3">
-          <ul class="space-x-8 text-sm flex pl-9">
+      <div class="h-20 bg-[#FD5720]">
+        <menu class="flex mt-5">
+          <ul class="space-x-8 text-sm flex pl-9 items-center">
             <li class="text-white inline text-xl mx-auto">
-              <img class="w-10 h-9 rounded-[5px]" src="./assets/icon.png" alt="" />
+              <img class="w-12 h-10 rounded-[5px]" src="./assets/icon2.png" alt="" />
             </li>
-            <li class="inline text-white"><a href="./components/CaseTwo.vue">Caso 1</a></li>
-            <li class="inline text-white"><a href="">Mas informacion</a></li>
-            <li class="inline text-white"><a href="">Uso</a></li>
+            <li class="inline text-white text-base border-b-2 border-white"><a href="">Caso 1</a></li>
+            <li class="inline text-white text-base"><a href="">Mas informacion</a></li>
+            <li class="inline text-white text-base"><a href="">Uso</a></li>
           </ul>
         </menu>
       </div>
 
-      <div class="flex flex-col w-full mx-auto relative">
+      <div class="flex flex-col max-w-5xl mx-auto relative">
         <div class="mx-auto">
-          <img class="mx-auto w-[460px] h-[360px]" src="./assets/enacim.png" alt="" />
+          <img class="mx-auto w-[760px] h-[450px]" src="./assets/base2.png" alt="" />
         </div>
-        <div class="absolute right-[20rem] top-[10rem] flex flex-col">
+        <div class="absolute right-[9rem] top-[10rem] flex flex-col">
           <span class="text-gray-400 pr-2 text-xs mx-auto">Masa 2 (kg)</span>
           <span
             class="pr-16 h-8 w-8 border-bg-[#5168FD] outline-none border-2 rounded-[6px] bg-slate-400 text-sm relative overflow-hidden text-white"
             >{{ masTwo }}</span
           >
         </div>
-        <div class="absolute left-[32rem] rotate-[10deg] top-[17.6rem] flex">
-          <span class="text-slate-300 pr-2 text-sm">θ</span>
+        <div class="absolute left-[19rem] rotate-[29deg] top-[20rem] flex">
+          <span class="text-white pr-2 text-sm">θ</span>
           <span
             class="pr-16 h-8 w-8 border-bg-[#5168FD] outline-none border-2 rounded-[6px] bg-slate-400 text-sm relative overflow-hidden text-white"
             >{{ anguloOne }}</span
           >
         </div>
-        <div class="absolute left-[17rem] top-48 flex flex-col">
+        <div class="absolute left-[8rem] top-[4rem] flex flex-col">
           <span class="text-gray-400 pr-2 text-xs mx-auto">Masa 1 (kg)</span>
           <span
             class="pr-16 h-8 w-8 border-bg-[#5168FD] outline-none border-2 rounded-[6px] bg-slate-400 text-sm relative overflow-hidden text-white"
             >{{ masaOne }}</span
           >
+          <div class=" absolute right-0 flex flex-col top-[4rem]">
+            <div class="bg-[#FD5720]">
+              
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="bg-[#FD5720] w-full pt-20 px-24 mx-auto">
+      <div class="bg-[#FD5720] w-full rounded-[20px] pt-12 px-24 mx-auto">
         <div class="mx-auto">
           <div class="flex mx-auto space-x-10 justify-center">
             <input
@@ -86,24 +94,103 @@ function calcular() {
               placeholder="Angulo"
             />
           </div>
-          <div class="flex mx-auto mt-10 mb-10 flex-col">
+          <div class="flex mx-auto mt-10 flex-col">
             <button
-              class="px-12 py-4 bg-white rounded-[6px] text-slate-400 mx-auto"
+              class="px-12 py-4 bg-white rounded-[6px] text-[#FD5720] font-bold mx-auto"
               aria-placeholder="Ir"
               @click="calcular()"
             >
               IR
             </button>
-           
-              <span class=" mt-7 text-white mx-auto">{{ coefRozamiento }}</span>
+
+            <span class="mt-7 text-white mx-auto">{{ coefRozamiento }}</span>
           </div>
         </div>
       </div>
-      <div class="">
-       
-      </div>
+      <div class=""></div>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.scale-out-center {
+  -webkit-animation: scale-out-center 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation: scale-out-center 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  
+}
+/* ----------------------------------------------
+ * Generated by Animista on 2023-11-23 3:39:50
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation scale-out-center
+ * ----------------------------------------
+ */
+@-webkit-keyframes scale-out-center {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 1;
+    display: none;
+  }
+}
+@keyframes scale-out-center {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 1;
+    display: none;
+  }
+}
+.fade-out {
+	-webkit-animation: fade-out 4s ease-out both;
+	        animation: fade-out 4s ease-out both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2023-11-23 3:41:41
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation fade-out
+ * ----------------------------------------
+ */
+@-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+
+</style>
